@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
-import { login } from "../../actions/auth";
+import { asyncLogin } from "../../actions/auth";
 
 export const LoginScreen = () => {
   const [{ email, password }, handleInputChanges] = useForm({
@@ -14,7 +14,7 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login(1234, "test"));
+    dispatch(asyncLogin(1234, "test"));
   };
 
   return (

@@ -4,13 +4,22 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+
 import { auth, googleProvider } from "../firebase/firebaseConfig";
 import { types } from "../types/types";
+import { finishLoading, startLoading } from "./ui";
 
 export const loginEmailPass = (email, password) => {
   return async (dispatch) => {
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
-    dispatch(login(user.uid, user.displayName));
+    dispatch(startLoading());
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      dispatch(login(user.uid, user.displayName));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(finishLoading());
+    }
   };
 };
 

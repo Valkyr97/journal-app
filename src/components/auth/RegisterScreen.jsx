@@ -5,7 +5,7 @@ import validator from "validator";
 
 import { removeError, setError } from "../../actions/ui";
 import { useForm } from "../../hooks/useForm";
-import { registerMailPassName } from "../../actions/auth";
+import { registerEmailPassName } from "../../actions/auth";
 
 export const RegisterScreen = () => {
   const [{ name, email, password, password2 }, handleChange] = useForm({
@@ -21,7 +21,7 @@ export const RegisterScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isFormValid()) dispatch(registerMailPassName(email, password, name));
+    if (isFormValid()) dispatch(registerEmailPassName(email, password, name));
   };
 
   const isFormValid = () => {

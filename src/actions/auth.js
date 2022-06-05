@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -23,7 +24,7 @@ export const loginEmailPass = (email, password) => {
   };
 };
 
-export const registerMailPassName = (email, password, name) => {
+export const registerEmailPassName = (email, password, name) => {
   return async (dispatch) => {
     try {
       const { user } = await createUserWithEmailAndPassword(
@@ -46,7 +47,22 @@ export const startGoogleLogin = () => {
   };
 };
 
+export const startLogout = () => {
+  return async (dispatch) => {
+    try {
+      await signOut(auth);
+      dispatch(logout());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const login = (uid, displayName) => ({
   type: types.login,
   payload: { uid, displayName },
+});
+
+export const logout = () => ({
+  type: types.logout,
 });
